@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Ursula Avon</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+        <link rel="stylesheet" type="text/css" href="/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="select2-4.0.0/dist/css/select2.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css"></link>
+        <link href="dashboard.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"></script>
+        <script src="select2-4.0.0/dist/js/select2.min.js"></script>
+        <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Ursula Avon</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li><a href ="#storage" data-toggle="tab">Ladu </a></li>
+                        <li><a href="#clients" data-toggle="tab">Kliendid</a></li>
+                        <li><a href="#products" data-toggle="tab">Tooted</a></li>
+                        <li><a href="#categories" data-toggle="tab">Kategooriad</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="tab-content">
+                        <div id="storage" class="tab-pane active">
+                            <h1>Ladu</h1>
+                            <br/>
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" onClick="newStorageItemModal()">
+                                Lisa toode lattu<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+                            </button>
+                            <br/>
+                            <br/>
+                            <div id="storageTableDiv"></div>
+                            <div class="modal fade" id="newStorageItemModal" tabindex="-1" role="dialog" aria-labelledby="newStorageItemModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Lisa uus toode lattu</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <br/><br/>
+                                            <form id="newStorageItemForm">
+                                                <div id="storageAlert"></div>
+                                                <div class="form-group">
+                                                    <label for="storageItemName">Toote nimetus</label>
+                                                    <select class="form-control" id="storageItemSelect" style="width:100%;"></select>
+                                                </div>  <br/>                                              
+                                                <div class="form-group">
+                                                    <label for="productProducedDate">Tootmise kuupäev</label>
+                                                    <div class="input-append date">
+                                                        <input type="text" class="form-control" id="productProducedDate" name="productProducedDate" placeholder="Tootmise kuupäev" >
+                                                        <span class="add-on"><i class="icon-th"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="preservationTime">Säilivus (kuudes)</label>
+                                                    <input type="text" class=" form-control" id="preservationTime" name="preservationTime" value="36" >
+                                                </div> 
+                                                <div class="form-group">
+                                                    <label for="buyingPrice">Ostmise hind</label>
+                                                    <input type="number" step="any" min="0" class=" form-control" id="buyingPrice" name="buyingPrice" placeholder="Ostmise hind" >
+                                                </div> 
+                                                <div class="form-group">
+                                                    <label for="sellingPrice">Müümise hind</label>
+                                                    <input type="number" step="any" min="0" class=" form-control" id="sellingPrice" name="sellingPrice" placeholder="Müümise hind" >
+                                                </div>  
+                                                <div class="form-group">
+                                                    <label for="amount">Kogus</label>
+                                                    <input type="number" min="1" class=" form-control" id="amount" name="amount" placeholder="Kogus" value="1">
+                                                </div>                                            
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tühista</button>
+                                            <button type="button" class="btn btn-primary" onclick="addNewItemToStorage()">Salvesta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="clients" class="tab-pane">
+                            <h1>Kliendid</h1>
+                        </div>
+                        <div id="products" class="tab-pane">
+                            <h1>Tooted</h1>
+                            <br/>
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" onClick="newProductModal()">
+                                Lisa uus toode <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+                            </button>
+                            <br/>
+                            <br/>
+                            <div id="productsTableDiv"></div>
+                            <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="newProductModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Lisa uus toode</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <form id="newProductForm">
+                                                <div id="productAlert"></div>
+                                                <div class="form-group">
+                                                    <label for="productName">Toote nimetus</label>
+                                                    <input type="text" class="form-control" id="productName" name="productName" placeholder="Toote nimetus">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="productCategorySelect">Toote kategooria</label><br/>
+                                                    <select class="form-control" id="productCategorySelect"></select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="productDescription">Kirjeldus</label>
+                                                    <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Kirjeldus">
+                                                </div>                                              
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tühista</button>
+                                            <button type="button" class="btn btn-primary" onclick="saveNewProduct()">Salvesta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modifyProductModal" tabindex="-1" role="dialog" aria-labelledby="modifyProductModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Muuda toodet</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <form id="modifyProductForm">
+                                                <div id="productAlert"></div>
+                                                <div class="form-group">
+                                                    <label for="modifyProductID">Toote ID</label>
+                                                    <input type="text" class="form-control" id="modifyProductID" name="modifyProductID"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="modifyProductName">Toote nimetus</label>
+                                                    <input type="text" class="form-control" id="modifyProductName" name="modifyProductName" placeholder="Kategooria"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="modifyProductCategorySelect">Toote kategooria</label><br/>
+                                                    <select class="form-control" id="modifyProductCategorySelect"></select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="modifyProductDescription">Kirjeldus</label>
+                                                    <input type="text" class="form-control" id="modifyProductDescription" name="modifyProductDescription" placeholder="Kirjeldus"/>
+                                                </div>                                              
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tühista</button>
+                                            <button type="button" class="btn btn-primary" onclick="updateProduct()">Salvesta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="categories" class="tab-pane">
+                            <h1>Kategooriad</h1>
+                            <br/>
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#newCategoryModal">
+                                Lisa uus kategooria <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+                            </button>
+                            <br/>
+                            <br/>
+                            <div id="categoriesTableDiv"></div>
+
+                            <div class="modal fade" id="newCategoryModal" tabindex="-1" role="dialog" aria-labelledby="newCategoryModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Lisa uus kategooria</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <form id="newCategoryForm">
+                                                <div id="categoryAlert"></div>
+                                                <div class="form-group">
+                                                    <label for="categoryName">Kategooria nimetus</label>
+                                                    <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Kategooria">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="categoryDescription">Kirjeldus</label>
+                                                    <input type="text" class="form-control" id="categoryDescription" name="categoryDescription" placeholder="Kirjeldus">
+                                                </div>                                              
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tühista</button>
+                                            <button type="button" class="btn btn-primary" onclick="saveNewCategory()">Salvesta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modifyCategoryModal" tabindex="-1" role="dialog" aria-labelledby="modifyCategoryModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Muuda kategooriat</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <form id="modifyCategoryForm">
+                                                <div id="categoryAlert"></div>
+                                                <div class="form-group">
+                                                    <label for="modifyCategoryID">Kategooria ID</label>
+                                                    <input type="text" class="form-control" id="modifyCategoryID" name="modifyCategoryID"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="modifyCategoryName">Kategooria nimetus</label>
+                                                    <input type="text" class="form-control" id="modifyCategoryName" name="modifyCategoryName" placeholder="Kategooria"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="modifyCategoryDescription">Kirjeldus</label>
+                                                    <input type="text" class="form-control" id="modifyCategoryDescription" name="modifyCategoryDescription" placeholder="Kirjeldus"/>
+                                                </div>                                              
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tühista</button>
+                                            <button type="button" class="btn btn-primary" onclick="updateCategory()">Salvesta</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function getStorageTable() {
+                var hr = new XMLHttpRequest();
+                var url = "getStorageTable.php";
+                hr.open("GET", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // Access the onreadystatechange event for the XMLHttpRequest object
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var return_data = hr.responseText;
+                        document.getElementById("storageTableDiv").innerHTML = return_data;
+                        $('#storageTable').dataTable();
+                    }
+                }
+                hr.send();
+            }
+            getStorageTable();
+
+            function newStorageItemModal() {
+                $("#storageItemSelect").select2({
+                    placeholder: "Vali toode",
+                    data: productsList,
+                    minimumResultsForSearch: Infinity
+                });
+
+                $('#productProducedDate').datepicker({
+                    format: 'dd.mm.yyyy',
+                    startDate: '-3y',
+                    todayHighlight: true
+                });
+
+                $("#newStorageItemModal").modal({ show: true });
+            }
+
+            function addNewItemToStorage() {
+                if (addingNewItemIsValid()) {
+                    var hr = new XMLHttpRequest();
+                    var url = "addNewStorageItem.php";
+                    var data = $('#newStorageItemForm').serialize();
+                    var productId = document.getElementById("storageItemSelect").value;
+                    data = data + "&productId=" + productId;
+                    hr.open("POST", url, true);
+                    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function () {
+                        if (hr.readyState == 4 && hr.status == 200) {
+                            var return_data = hr.responseText;
+                            getStorageTable();
+                            $('#newStorageItemModal').modal('hide');
+                        }
+                    }
+                    hr.send(data);
+                }
+            }
+
+            function addingNewItemIsValid() {
+                return true;
+            }
+
+            function getProductsTable() {
+                var hr = new XMLHttpRequest();
+                var url = "getProductsTable.php";
+                hr.open("GET", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // Access the onreadystatechange event for the XMLHttpRequest object
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var return_data = hr.responseText;
+                        document.getElementById("productsTableDiv").innerHTML = return_data;
+                        $('#productTable').dataTable();
+                    }
+                }
+                hr.send();
+            }
+            getProductsTable();
+
+            var productsList;
+            function getProductsList() {
+                var hr = new XMLHttpRequest();
+                var url = "getProductsList.php";
+                hr.open("GET", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // Access the onreadystatechange event for the XMLHttpRequest object
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        productsList = JSON.parse(hr.responseText);
+                    }
+                }
+                hr.send();
+            }
+            getProductsList();
+
+            function newProductModal() {
+                $("#productCategorySelect").select2({
+                    placeholder: "Vali kategooria",
+                    data: productCategoriesList,
+                    minimumResultsForSearch: Infinity
+                });
+                $("#newProductModal").modal({ show: true });
+            }
+
+            function saveNewProduct() {
+                var name = document.getElementById("productName").value;
+                if (name !== undefined && name !== "") {
+                    var hr = new XMLHttpRequest();
+                    var url = "addNewProduct.php";
+                    var data = $('#newProductForm').serialize();
+                    var categoryId = document.getElementById("productCategorySelect").value;
+                    data = data + "&categoryId=" + categoryId;
+                    hr.open("POST", url, true);
+                    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function () {
+                        if (hr.readyState == 4 && hr.status == 200) {
+                            var return_data = hr.responseText;
+                            getProductsTable();
+                            $('#newProductModal').modal('hide');
+                        }
+                    }
+                    hr.send(data);
+                } else {
+                    document.getElementById("productAlert").classList.add("alert");
+                    document.getElementById("productAlert").classList.add("alert-danger");
+                    document.getElementById("productAlert").innerHTML = "Toote nimetus peab olema määratud!";
+                }
+            }
+
+            function changeProductModal(productID, productName, productCategory, productDescription) {
+                document.getElementById("modifyProductID").value = productID;
+                document.getElementById("modifyProductName").value = productName;
+                $("#modifyProductCategorySelect").select2({
+                    placeholder: "Vali kategooria",
+                    data: productCategoriesList,
+                    minimumResultsForSearch: Infinity
+                });
+                $('select[id=modifyProductCategorySelect]').val(productCategory);
+                $('select[id=modifyProductCategorySelect]').change()
+                document.getElementById("modifyProductDescription").value = productDescription;
+                $("#modifyProductModal").modal({ show: true });
+            }
+
+            function updateProduct() {
+                var name = document.getElementById("modifyProductName").value;
+                if (name !== undefined && name !== "") {
+                    var hr = new XMLHttpRequest();
+                    var url = "updateProduct.php";
+                    var data = $('#modifyProductForm').serialize();
+                    var categoryId = document.getElementById("modifyProductCategorySelect").value;
+                    data = data + "&categoryId=" + categoryId;
+                    hr.open("POST", url, true);
+                    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function () {
+                        if (hr.readyState == 4 && hr.status == 200) {
+                            var return_data = hr.responseText;
+                            getProductsTable();
+                            $('#modifyProductModal').modal('hide');
+                        }
+                    }
+                    hr.send(data);
+                } else {
+                    document.getElementById("productAlert").classList.add("alert");
+                    document.getElementById("productAlert").classList.add("alert-danger");
+                    document.getElementById("productAlert").innerHTML = "Toote nimetus peab olema määratud!";
+                }
+            }
+
+            function archiveProduct(productId) {
+                BootstrapDialog.confirm('Kas oled kindel, et soovid toote arhiveerida? (ei saa enam lattu ega klientidele lisada)', function (result) {
+                    if (result) {
+                        deleteProduct(productId);
+                    }
+                });
+            }
+
+            function deleteProduct(productId) {
+                var hr = new XMLHttpRequest();
+                var url = "deleteProduct.php";
+                hr.open("POST", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var return_data = hr.responseText;
+                        getProductsTable();
+                    }
+                }
+                hr.send("productID=" + productId);
+            }
+
+            var productCategoriesList;
+            function getProductCategoriesList() {
+                var hr = new XMLHttpRequest();
+                var url = "getCategoriesList.php";
+                hr.open("GET", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // Access the onreadystatechange event for the XMLHttpRequest object
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        productCategoriesList = JSON.parse(hr.responseText);
+                    }
+                }
+                hr.send();
+            }
+
+            getProductCategoriesList();
+
+
+            function getCategoriesTable() {
+                var hr = new XMLHttpRequest();
+                var url = "getCategoriesTable.php";
+                hr.open("GET", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // Access the onreadystatechange event for the XMLHttpRequest object
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var return_data = hr.responseText;
+                        document.getElementById("categoriesTableDiv").innerHTML = return_data;
+                        $('#productCategoryTable').dataTable();
+                    }
+                }
+                hr.send();
+            }
+            getCategoriesTable();
+
+            function saveNewCategory() {
+                var name = document.getElementById("categoryName").value;
+                if (name !== undefined && name !== "") {
+                    var hr = new XMLHttpRequest();
+                    var url = "addNewCategory.php";
+                    var data = $('#newCategoryForm').serialize();
+                    hr.open("POST", url, true);
+                    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function () {
+                        if (hr.readyState == 4 && hr.status == 200) {
+                            var return_data = hr.responseText;
+                            getCategoriesTable();
+                            $('#newCategoryModal').modal('hide');
+                        }
+                    }
+                    hr.send(data);
+                } else {
+                    document.getElementById("categoryAlert").classList.add("alert");
+                    document.getElementById("categoryAlert").classList.add("alert-danger");
+                    document.getElementById("categoryAlert").innerHTML = "Kategooria nimetus peab olema määratud!";
+                }
+            }
+
+            function changeCategoryModal(categoryID, categoryName, categoryDescription) {
+                document.getElementById("modifyCategoryID").value = categoryID;
+                document.getElementById("modifyCategoryName").value = categoryName;
+                document.getElementById("modifyCategoryDescription").value = categoryDescription;
+                $("#modifyCategoryModal").modal({ show: true });
+            }
+
+            function updateCategory() {
+                var name = document.getElementById("modifyCategoryName").value;
+                if (name !== undefined && name !== "") {
+                    var hr = new XMLHttpRequest();
+                    var url = "updateCategory.php";
+                    var data = $('#modifyCategoryForm').serialize();
+                    hr.open("POST", url, true);
+                    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function () {
+                        if (hr.readyState == 4 && hr.status == 200) {
+                            var return_data = hr.responseText;
+                            getCategoriesTable();
+                            $('#modifyCategoryModal').modal('hide');
+                        }
+                    }
+                    hr.send(data);
+                } else {
+                    document.getElementById("categoryAlert").classList.add("alert");
+                    document.getElementById("categoryAlert").classList.add("alert-danger");
+                    document.getElementById("categoryAlert").innerHTML = "Kategooria nimetus peab olema määratud!";
+                }
+            }
+
+            function archiveCategory(categoryId) {
+                BootstrapDialog.confirm('Kas oled kindel, et soovid kategooria arhiveerida? (ei saa enam uutele toodetele lisada)', function (result) {
+                    if (result) {
+                        deleteCategory(categoryId);
+                    }
+                });
+            }
+
+            function deleteCategory(categoryId) {
+                var hr = new XMLHttpRequest();
+                var url = "deleteCategory.php";
+                hr.open("POST", url, true);
+                hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                hr.onreadystatechange = function () {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var return_data = hr.responseText;
+                        getCategoriesTable();
+                    }
+                }
+                hr.send("categoryID=" + categoryId);
+            }
+        </script>
+    </body>
+</html>
