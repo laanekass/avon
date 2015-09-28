@@ -6,9 +6,14 @@
         die('Could not connect: ' .mysqli_error($con));
     }
 
-    $sql="SELECT product_id, p.name as product, c.name as category, p.category as category_id, p.description  FROM avon.product p, avon.product_category c WHERE p.is_archived=0 and p.category = c.product_category_id";
+    $sql="SELECT year,  campaign_number FROM avon.campaign 
+            ORDER BY year desc, campaign_number desc LIMIT 1;";
     $result = mysqli_query($con,$sql);
-    include 'productTable.php';
+    $rows = array();
+    while($r = mysqli_fetch_assoc($result)) {
+        $rows[] = $r;
+    }
+    echo json_encode($rows);
     mysqli_close($con);
 ?>
 

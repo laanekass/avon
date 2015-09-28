@@ -11,6 +11,7 @@
                 <thead>
                      <tr>
                         <th><div><span>Toote nimetus</span></div></th>
+                        <th><div><span>Maht</span></div></th>
                         <th><div><span>Kategooria</span></div></th>
                         <th><div><span>Kirjeldus</span></div></th>
                         <th><div><span>Muuda</span></div></th>
@@ -21,6 +22,7 @@
                  while($row = mysqli_fetch_array($result)) {
                     echo '<tr>';
                         echo '<td>'.$row['product'].'</td>';
+                        echo '<td>'.$row['unit_amount'].'</td>';
                         echo '<td>'.$row['category'].'</td>';
                         echo '<td>'.$row['description'].'</td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
