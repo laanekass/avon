@@ -21,7 +21,8 @@
                     echo '<tr>';
                         echo '<td>'.$row['name'].'</td>';
                         echo '<td>'.$row['description'].'</td>';
-                        echo '<td><button type="button" class="btn btn-default" data-toggle="modal" onClick="changeCategoryModal('.$row['product_category_id'].', \''.$row['name'].'\' , \''.$row['description'].'\')")>
+                        echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
+                                onClick="changeCategoryModal('.$row['product_category_id'].', \''.$row['name'].'\' , \''.$row['description'].'\')")>
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
                             </button></td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 

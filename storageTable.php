@@ -28,6 +28,8 @@
                 </thead>
                 <tbody>';
                  while($row = mysqli_fetch_array($result)) {
+                     $item_id = $row['item_id'];
+                     $product_id = $row['product_id'];
                      $buying_price = $row['buying_price'];
                      $selling_price = $row['selling_price'];
                      $amount = $row['amount'];
@@ -47,7 +49,8 @@
                         echo '<td>'.$amount.'</td>';
                         echo '<td>'.$total_gap.'</td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
-                                onClick="changeStorageItemModal('\''.$row['campaign'].'\', \''.$row['product_name'].'\', \''.$row['product_description'].'\' , '.$row['category'].' , \''.$row['produced_date'].'\')")>
+                                onClick="changeStorageItemModal(\''.$row['campaign'].'\', '.$item_id.', '.$product_id.' ,\''.$row['product_name'].'\', \''.$row['product_description'].'\' , 
+                                \''.$row['category'].'\' , \''.$row['produced_date'].'\', \''.$row['location'].'\', '.$buying_price.', '.$selling_price.')")>
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
                             </button></td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 

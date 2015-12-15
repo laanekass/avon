@@ -7,6 +7,7 @@
     }
 
     $sql="SELECT    s.item_id, 
+                    p.product_id as product_id,
                     p.name as product_name, 
                     concat(p.unit_amount, ' ', u.shortened_name) as product_unit,
                     p.description  as product_description,
