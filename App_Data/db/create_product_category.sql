@@ -1,4 +1,4 @@
-﻿CREATE TABLE `product_category` (
+CREATE TABLE `avon`.`product_category` (
   `product_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` varchar(45) DEFAULT NULL,

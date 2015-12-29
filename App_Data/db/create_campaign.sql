@@ -1,4 +1,4 @@
-﻿CREATE TABLE `campaign` (
+CREATE TABLE `avon`.`campaign` (
   `campaign_id` int(11) NOT NULL AUTO_INCREMENT,
   `year` int(11) NOT NULL COMMENT 'year of the campaign',
   `campaign_number` int(11) NOT NULL COMMENT 'number of campaign on defined year',
