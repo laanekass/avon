@@ -12,9 +12,9 @@
         die('Could not connect: ' .mysqli_error($con));
     }
     echo $buyingPrice;
-    $sql="INSERT INTO avon.storage(product_id, produced_date, location, buying_price, selling_price,amount, campaign_id ) 
-            VALUES (".$productId.", '".$productProducedDate."', '".$location."', ".$buyingPrice.", "
-            .$sellingPrice.", ".$amount.", ".$campaignId.")";
+    $sql="INSERT INTO avon.storage(product_id, produced_date, location, buying_price, selling_price,amount, campaign_id ) ".
+            "VALUES (".$productId.", '".$productProducedDate."', '".$location."', ".$buyingPrice.", ".
+            $sellingPrice.", ".$amount.", ".$campaignId.")";
     echo $sql;
     $result = mysqli_query($con,$sql);
     mysqli_close($con);

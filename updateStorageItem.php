@@ -12,7 +12,8 @@
     if (!$con) {
         die('Could not connect: ' .mysqli_error($con));
     }    
-    $sql="UPDATE avon.storage SET produced_date = '".$produced_date."', buying_price = ".$buying_price.", selling_price = ".$selling_price.", amount = ".$amount.", location = '".$location."', campaign_id=".$campaignId." WHERE item_id = ".$storage_item_id;
+    $sql="UPDATE avon.storage SET produced_date = '".$produced_date."', buying_price = ".$buying_price.", selling_price = ".$selling_price.
+            ", amount = ".$amount.", location = '".$location."', campaign_id=".$campaignId." WHERE item_id = ".$storage_item_id;
     $result = mysqli_query($con,$sql);
     mysqli_close($con);
 ?>

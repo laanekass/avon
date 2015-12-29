@@ -6,8 +6,8 @@
         die('Could not connect: ' .mysqli_error($con));
     }
 
-    $sql="SELECT year,  campaign_number FROM avon.campaign 
-            ORDER BY year desc, campaign_number desc LIMIT 1;";
+    $sql="SELECT year,  campaign_number FROM avon.campaign ".
+            "ORDER BY year desc, campaign_number desc LIMIT 1;";
     $result = mysqli_query($con,$sql);
     $rows = array();
     while($r = mysqli_fetch_assoc($result)) {
