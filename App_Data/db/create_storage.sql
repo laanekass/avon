@@ -1,4 +1,4 @@
-﻿CREATE TABLE `storage` (
+CREATE TABLE `avon`.`storage` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
   `produced_date` date NOT NULL,
