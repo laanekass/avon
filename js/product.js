@@ -32,6 +32,11 @@ function getProductsList() {
 getProductsList();
 
 function newProductModal() {
+    $("#productUnitSelect").select2({
+        placeholder: "Vali Ühik",
+        data: unitsList,
+        minimumResultsForSearch: Infinity
+    });
     $("#productCategorySelect").select2({
         placeholder: "Vali kategooria",
         data: productCategoriesList,
@@ -46,8 +51,9 @@ function saveNewProduct() {
         var hr = new XMLHttpRequest();
         var url = "addNewProduct.php";
         var data = $('#newProductForm').serialize();
+        var unitId =  document.getElementById("productUnitSelect").value;
         var categoryId = document.getElementById("productCategorySelect").value;
-        data = data + "&categoryId=" + categoryId;
+        data = data + "&categoryId=" + categoryId + "&unitId=" + unitId;
         hr.open("POST", url, true);
         hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         hr.onreadystatechange = function () {
