@@ -71,18 +71,29 @@ function saveNewProduct() {
     }
 }
 
-function changeProductModal(productID, productName, productCategory, productDescription) {
+function changeProductModal(productID, productName, productCategory, productUnit, productAmount, productDescription) {
     console.log('HERE');
-    console.log(productID);
     document.getElementById("modifyProductID").value = productID;
     document.getElementById("modifyProductName").value = productName;
+
     $("#modifyProductCategorySelect").select2({
         placeholder: "Vali kategooria",
         data: productCategoriesList,
         minimumResultsForSearch: Infinity
     });
     $('select[id=modifyProductCategorySelect]').val(productCategory);
-    $('select[id=modifyProductCategorySelect]').change()
+    $('select[id=modifyProductCategorySelect]').change();
+
+    document.getElementById("modifyProductUnitAmount").value = productAmount;
+
+    $("#modifyProductUnitSelect").select2({
+        placeholder: "Vali kategooria",
+        data: unitsList,
+        minimumResultsForSearch: Infinity
+    });
+    $('select[id=modifyProductUnitSelect]').val(productUnit);
+    $('select[id=modifyProductUnitSelect]').change();
+
     document.getElementById("modifyProductDescription").value = productDescription;
     $("#modifyProductModal").modal({ show: true });
 }
@@ -94,7 +105,8 @@ function updateProduct() {
         var url = "updateProduct.php";
         var data = $('#modifyProductForm').serialize();
         var categoryId = document.getElementById("modifyProductCategorySelect").value;
-        data = data + "&categoryId=" + categoryId;
+        var unitId = document.getElementById("modifyProductUnitSelect").value;
+        data = data + "&categoryId=" + categoryId + "&unitId=" + unitId;
         hr.open("POST", url, true);
         hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         hr.onreadystatechange = function () {
