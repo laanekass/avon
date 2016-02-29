@@ -6,7 +6,7 @@
         die('Could not connect: ' .mysqli_error($con));
     }
 
-    $sql="SELECT    s.item_id, p.product_id as product_id, p.name as product_name, concat(p.unit_amount, ' ', u.shortened_name) as product_unit,".
+    $sql="SELECT    s.item_id, p.product_id as product_id, p.name as product_name, if (p.catalogue_code is null, -1, p.catalogue_code) as product_catalogue_code, concat(p.unit_amount, ' ', u.shortened_name) as product_unit,".
                     "p.description  as product_description, c.name as category, s.produced_date, s.preservation, s.buying_price, s.selling_price, ".
                     "s.amount, concat(cam.year, '_', cam.campaign_number) as campaign, s.location ".
             "FROM avon.storage s, avon.product p, avon.product_category c, avon.campaign cam, avon.unit u ".

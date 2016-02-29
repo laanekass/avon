@@ -71,10 +71,12 @@ function saveNewProduct() {
     }
 }
 
-function changeProductModal(productID, productName, productCategory, productUnit, productAmount, productDescription) {
-    console.log('HERE');
+function changeProductModal(productID, productName, productCatalogueCode, productCategory, productUnit, productAmount, productDescription) {
     document.getElementById("modifyProductID").value = productID;
     document.getElementById("modifyProductName").value = productName;
+    if(productCatalogueCode!=-1){
+        document.getElementById("modifyProductCatalogueCode").value = productCatalogueCode;    
+    }    
 
     $("#modifyProductCategorySelect").select2({
         placeholder: "Vali kategooria",

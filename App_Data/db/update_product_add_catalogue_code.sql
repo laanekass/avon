@@ -1,0 +1,1 @@
+﻿ALTER TABLE product ADD catalogue_code INTEGER(11) AFTER name;

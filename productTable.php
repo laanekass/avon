@@ -11,6 +11,7 @@
                 <thead>
                      <tr>
                         <th><div><span>Toote nimetus</span></div></th>
+                        <th><div><span>Kataloogi kood</span></div></th>
                         <th><div><span>Maht</span></div></th>
                         <th><div><span>Kategooria</span></div></th>
                         <th><div><span>Kirjeldus</span></div></th>
@@ -22,13 +23,19 @@
                  while($row = mysqli_fetch_array($result)) {
                     $unit_id = $row['unit_id'];
                     $amount = $row['amount'];
+                    if ($row['catalogue_code'] == -1) {
+                        $productCatalogueCode='Määramata';
+                    }else {
+                        $productCatalogueCode=$row['catalogue_code'];
+                    }                    
                     echo '<tr>';
                         echo '<td>'.$row['product'].'</td>';
+                        echo '<td>'.$productCatalogueCode.'</td>';
                         echo '<td>'.$row['unit_amount'].'</td>';
                         echo '<td>'.$row['category'].'</td>';
                         echo '<td>'.$row['description'].'</td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
-                                onClick="changeProductModal('.$row['product_id'].', \''.$row['product'].'\' , '.$row['category_id'].' ,'.$unit_id.' , '.$amount.' , \''.$row['description'].'\')")>
+                                onClick="changeProductModal('.$row['product_id'].', \''.$row['product'].'\' , '.$row['catalogue_code'].', '.$row['category_id'].' ,'.$unit_id.' , '.$amount.' , \''.$row['description'].'\')")>
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
                             </button></td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 

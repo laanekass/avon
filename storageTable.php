@@ -12,6 +12,7 @@
                      <tr>
                         <th><div><span>Kampaania</span></div></th>
                         <th><div><span>Toote nimetus</span></div></th>
+                        <th><div><span>Kataloogi kood</span></div></th>
                         <th><div><span>Toote maht</span></div></th>
                         <th><div><span>Toote kirjeldus</span></div></th>
                         <th><div><span>Kategooria</span></div></th>
@@ -35,9 +36,15 @@
                      $amount = $row['amount'];
                      $unit_gap = $selling_price - $buying_price;
                      $total_gap = $unit_gap * $amount;
+                     if ($row['product_catalogue_code'] == -1) {
+                        $productCatalogueCode='Määramata';
+                    }else {
+                        $productCatalogueCode=$row['catalogue_code'];
+                    }
                     echo '<tr>';
                         echo '<td>'.$row['campaign'].'</td>';
                         echo '<td>'.$row['product_name'].'</td>';
+                        echo '<td>'.$productCatalogueCode.'</td>';
                         echo '<td>'.$row['product_unit'].'</td>';
                         echo '<td>'.$row['product_description'].'</td>';
                         echo '<td>'.$row['category'].'</td>';
