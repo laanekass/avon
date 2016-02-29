@@ -1,3 +1,19 @@
+var clientsList;
+function getClientsList() {
+    var hr = new XMLHttpRequest();
+    var url = "getClientsList.php";
+    hr.open("GET", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            clientsList = JSON.parse(hr.responseText);
+        }
+    }
+    hr.send();
+}            
+getClientsList();
+
 function getClientsTable() {
     var hr = new XMLHttpRequest();
     var url = "getClientsTable.php";
