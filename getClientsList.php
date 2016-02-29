@@ -7,7 +7,7 @@
     }
 
     $sql="SELECT client_id as id, concat(last_name, ', ', first_name) as text FROM avon.client WHERE is_archived=0 ".
-            "ORDER BY last_name desc, first_name desc;";
+            "ORDER BY last_name asc, first_name asc;";
     $result = mysqli_query($con,$sql);
     $rows = array();
     while($r = mysqli_fetch_assoc($result)) {

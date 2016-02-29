@@ -60,9 +60,9 @@
                                 \''.$row['category'].'\' , \''.$row['produced_date'].'\', \''.$row['location'].'\', '.$buying_price.', '.$selling_price.')")>
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
                             </button></td>';
-                        echo '<td><button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 
-                                title="Arhiveeritud toodet ei ole enam tabelis näha ja seda ei saa lattu panna ja klientide müükidele lisada." onClick="archiveProduct('.$row['product_id'].')")>
-                                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> 
+                        echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
+                                onClick="sellStorageItemToClientModal('.$row['item_id'].', '.$product_id.' ,\''.$row['product_name'].'\', '.$buying_price.', '.$selling_price.', '.$amount.')")>
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
                             </button></td>';
                     echo '</tr>';
                  }

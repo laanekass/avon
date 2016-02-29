@@ -47,6 +47,7 @@ function saveNewClient() {
             if (hr.readyState == 4 && hr.status == 200) {
                 var return_data = hr.responseText;
                 getClientsTable();
+                getClientsList();
                 $('#newClientModal').modal('hide');
             }
         }
@@ -81,6 +82,7 @@ function updateClient() {
             if (hr.readyState == 4 && hr.status == 200) {
                 var return_data = hr.responseText;
                 getClientsTable();
+                getClientsList();
                 $('#modifyClientModal').modal('hide');
             }
         }
@@ -109,7 +111,25 @@ function deleteClient(clientId) {
         if (hr.readyState == 4 && hr.status == 200) {
             var return_data = hr.responseText;
             getClientsTable();
+            getClientsList();
         }
     }
     hr.send("clientID=" + clientId);
+}
+
+function viewClientSalesModal(clientId) {
+    var hr = new XMLHttpRequest();
+    var url = "getClientSalesTable.php";
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+            document.getElementById("clientSalesTableDiv").innerHTML = return_data;
+            $('#clientSalesTable').dataTable();
+        }
+    }
+    hr.send("clientID=" + clientId);
+    $("#clientSalesModal").modal({ show: true });
 }
