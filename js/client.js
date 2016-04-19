@@ -133,3 +133,20 @@ function viewClientSalesModal(clientId) {
     hr.send("clientID=" + clientId);
     $("#clientSalesModal").modal({ show: true });
 }
+
+function viewClientReservedProductsModal(clientId) {
+    var hr = new XMLHttpRequest();
+    var url = "getClientReservedProductsTable.php";
+    hr.open("POST", url, true);
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var return_data = hr.responseText;
+            document.getElementById("clientReservedProductsTableDiv").innerHTML = return_data;
+            $('#clientReservedProductsTable').dataTable();
+        }
+    }
+    hr.send("clientID=" + clientId);
+    $("#clientReservedProductsModal").modal({ show: true });    
+}

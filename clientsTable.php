@@ -16,7 +16,8 @@
                         <th><div><span>Telefon</span></div></th>
                         <th><div><span>E-Mail</span></div></th>
                         <th><div><span>Aadress</span></div></th>
-                        <th><div><span>Kliendi ostud</span></div></th>
+                        <th><div><span>Ostud</span></div></th>
+                        <th><div><span>Reservis</span></div></th>
                         <th><div><span>Muuda</span></div></th>
                         <th><div><span>Arhiveeri</span></div></th>
                      </tr>
@@ -33,6 +34,10 @@
                         echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
                                 onClick="viewClientSalesModal('.$row['client_id'].')")>
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 
+                            </button></td>';
+                        echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
+                                onClick="viewClientReservedProductsModal('.$row['client_id'].')")>
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
                             </button></td>';
                         echo '<td><button type="button" class="btn btn-default" data-toggle="modal" 
                                 onClick="changeClientModal('.$row['client_id'].', \''.$row['first_name'].'\' , \''.$row['last_name'].'\', \''.$row['birthday'].'\', '.$row['phone'].', \''.$row['email'].'\', \''.$row['address'].'\')")>
